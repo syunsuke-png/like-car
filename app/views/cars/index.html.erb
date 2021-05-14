@@ -1,0 +1,14 @@
+<h1>投稿一覧</h1>
+<div class="content">
+  <div class="contents">
+    <% @cars.each do |car| %>
+      <h2 class="car-name"><%= car.car_name %></h2>
+      <h2 class="car-text"><%= car.text %></h2>
+      <%= link_to car_path(car.id), method: :get do%>
+      <div class="car-image">
+        <%= image_tag car.image, class: "car-image" if car.image.attached? %>
+      </div>
+      <% end%>
+    <% end %>
+  </div>
+</div>

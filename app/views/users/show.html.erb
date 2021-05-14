@@ -1,0 +1,9 @@
+<div class="car-show">
+  <div class="car-box">
+    <h1><%= @nickname %>さんの投稿一覧</h1>
+    <% @cars.each do |car| %>
+      <h2 class="car-text"><%= car.text %></h2>
+      <h2 class="car-name"><%= car.car_name %></h2>
+      <%= image_tag car.image, class: "show-image"%>
+    <% end %>
+</div>

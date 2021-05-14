@@ -1,0 +1,42 @@
+<div class="car-show">
+  <div class="car-box">
+    <h2 class="car-name">
+      <%= @car.car_name%>
+    </h2>
+    <div class="text">
+      <h2 class="car-text">
+        <%= @car.text%>
+      </h2>
+    </div>
+    <%= image_tag @car.image, class: "show-image" if @car.image.attached? %>
+  </div>
+  
+  <div class="edit">
+    <%if user_signed_in?%>
+      <%if current_user.id == @car.user_id%>
+      <%= link_to "商品の編集", edit_car_path(@car.id), method: :get, class: "car-edit" %> 
+      <%= link_to "削除", car_path(@car.id), method: :delete, class: "car-destroy" %>
+      <%end%>
+    <%end%>
+  </div>
+
+  <div class="container">
+    <% if user_signed_in? %>
+      <%= form_with(model: [@car, @comment], local: true) do |form| %>
+        <%= form.text_area :text, placeholder: "コメントする", rows: "2" %>
+        <%= form.submit "送信" %>
+      <% end %>
+    <% else %>
+      <strong><p>※※※ コメントの投稿には新規登録/ログインが必要です ※※※</p></strong>
+    <% end %>
+    <div class="comments">
+      <h4>＜コメント一覧＞</h4>
+      <% @comments.each do |comment| %>
+        <p>
+          <strong><%=comment.user.nickname%></strong>
+          <%= comment.text %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>
